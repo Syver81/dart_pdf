@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+  18.03.2023, by Syver81
+  added decoration to action button area in PdfPreviewController
+  remove Material and changed SizedBox to Container
+*/
+
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -49,6 +55,7 @@ class PdfPreview extends StatefulWidget {
     this.onShared,
     this.scrollViewDecoration,
     this.pdfPreviewPageDecoration,
+    this.actionAreaDecoration,
     this.pdfFileName,
     this.useActions = true,
     this.pages,
@@ -106,6 +113,7 @@ class PdfPreview extends StatefulWidget {
     this.onShared,
     this.scrollViewDecoration,
     this.pdfPreviewPageDecoration,
+    this.actionAreaDecoration,
     this.pdfFileName,
     this.useActions = true,
     this.pages,
@@ -178,6 +186,9 @@ class PdfPreview extends StatefulWidget {
 
   /// Decoration of PdfPreviewPage
   final Decoration? pdfPreviewPageDecoration;
+
+  /// Decoration of PdfPreviewController action area
+  final Decoration? actionAreaDecoration;
 
   /// Name of the PDF when sharing. It must include the extension.
   final String? pdfFileName;
@@ -405,16 +416,13 @@ class PdfPreviewState extends State<PdfPreview> {
               data: IconThemeData(
                 color: iconColor,
               ),
-              child: Material(
-                elevation: 4,
-                color: theme.primaryColor,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: SafeArea(
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceAround,
-                      children: actions,
-                    ),
+              child: Container(
+                decoration: widget.actionAreaDecoration,
+                width: double.infinity,
+                child: SafeArea(
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceAround,
+                    children: actions,
                   ),
                 ),
               ),
